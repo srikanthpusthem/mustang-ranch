@@ -3,7 +3,7 @@ import { AgentDock } from '@/components/AgentDock';
 import { AgentProvider } from '@/components/AgentProvider';
 
 // Mock fetch
-global.fetch = vi.fn();
+global.fetch = vi.fn() as ReturnType<typeof vi.fn>;
 
 const renderWithProvider = (component: React.ReactElement) => {
   return render(
@@ -15,7 +15,7 @@ const renderWithProvider = (component: React.ReactElement) => {
 
 describe('AgentDock', () => {
   beforeEach(() => {
-    (fetch as any).mockClear();
+    (global.fetch as ReturnType<typeof vi.fn>).mockClear();
   });
 
   it('renders the agent dock button', () => {
@@ -48,7 +48,7 @@ describe('AgentDock', () => {
   });
 
   it('sends message when form is submitted', async () => {
-    (fetch as any).mockResolvedValueOnce({
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       ok: true,
       json: async () => ({ response: 'Test response' }),
     });
