@@ -25,7 +25,7 @@ export function Hero() {
                 className="text-4xl lg:text-6xl font-serif font-bold text-foreground leading-tight"
               >
                 Invest in the{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-mustang to-sage">
+                <span className="text-mustang font-extrabold">
                   New West
                 </span>
               </motion.h1>
