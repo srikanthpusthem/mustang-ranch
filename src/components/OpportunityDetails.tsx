@@ -13,6 +13,7 @@ import {
   Target
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Opportunity {
   slug: string;
@@ -50,6 +51,7 @@ const riskColors = {
 };
 
 export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
+  const router = useRouter();
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -96,11 +98,13 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <Button asChild variant="ghost" className="gap-2">
-            <Link href="/invest">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Opportunities
-            </Link>
+          <Button 
+            variant="ghost" 
+            className="gap-2"
+            onClick={() => router.push("/invest")}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Opportunities
           </Button>
         </motion.div>
 

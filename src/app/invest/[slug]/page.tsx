@@ -29,8 +29,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
   const opportunity = opportunitiesData.find(
-    (opp) => opp.slug === params.slug
+    (opp) => opp.slug === resolvedParams.slug
   ) as Opportunity | undefined;
 
   if (!opportunity) {
@@ -50,9 +51,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function OpportunityPage({ params }: PageProps) {
+export default async function OpportunityPage({ params }: PageProps) {
+  const resolvedParams = await params;
   const opportunity = opportunitiesData.find(
-    (opp) => opp.slug === params.slug
+    (opp) => opp.slug === resolvedParams.slug
   ) as Opportunity | undefined;
 
   if (!opportunity) {
