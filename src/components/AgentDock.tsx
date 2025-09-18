@@ -98,14 +98,30 @@ export function AgentDock() {
         <motion.div
           className="fixed bottom-6 right-6 z-50"
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 1 }}
+          animate={{ 
+            opacity: 1, 
+            scale: 1,
+            boxShadow: [
+              "0 0 0 0 rgba(59, 130, 246, 0.7)",
+              "0 0 0 10px rgba(59, 130, 246, 0)",
+              "0 0 0 0 rgba(59, 130, 246, 0)"
+            ]
+          }}
+          transition={{ 
+            duration: 0.3, 
+            delay: 1,
+            boxShadow: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <Button
             size="lg"
-            className="h-14 w-14 rounded-full bg-mustang hover:bg-mustang/90 text-white shadow-xl border-2 border-white/20 backdrop-blur-sm"
+            className="h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-2xl border-2 border-white ring-4 ring-blue-100 hover:ring-blue-200 transition-all duration-200"
             aria-label="Open AI Wrangler"
           >
             <MessageCircle className="h-6 w-6" />
