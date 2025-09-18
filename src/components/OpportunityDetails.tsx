@@ -13,7 +13,6 @@ import {
   Target
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface Opportunity {
   slug: string;
@@ -51,7 +50,6 @@ const riskColors = {
 };
 
 export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
-  const router = useRouter();
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -78,6 +76,22 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
       question: "Can I withdraw my investment early?",
       answer: "Early withdrawal options vary by project. Most opportunities have a minimum holding period of 12-24 months. Please review the specific terms for this investment opportunity.",
     },
+    {
+      question: "What makes this investment unique?",
+      answer: `This ${opportunity.type} investment offers a unique opportunity to support ${opportunity.type === 'mustang' ? 'wild mustang preservation and breeding programs' : opportunity.type === 'barndominium' ? 'sustainable rural development with modern amenities' : 'community-driven agriculture and food security initiatives'} while generating competitive returns.`,
+    },
+    {
+      question: "How does the AI wrangler help with investments?",
+      answer: "Our AI wrangler can answer questions about investment opportunities, explain risk factors, help you understand the investment process, and connect you with the right resources for your investment goals.",
+    },
+    {
+      question: "What happens after I invest?",
+      answer: "After investing, you'll receive regular updates on project progress, quarterly performance reports, and have access to our investor portal where you can track your investment and communicate with the project team.",
+    },
+    {
+      question: "Are there any tax implications?",
+      answer: "Investment returns may have tax implications depending on your location and investment structure. We recommend consulting with a tax professional to understand the specific implications for your situation.",
+    },
   ];
 
   const risks = [
@@ -98,13 +112,11 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <Button 
-            variant="ghost" 
-            className="gap-2"
-            onClick={() => router.push("/invest")}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Opportunities
+          <Button asChild variant="ghost" className="gap-2">
+            <Link href="/invest">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Opportunities
+            </Link>
           </Button>
         </motion.div>
 
