@@ -68,3 +68,4 @@ export function FAQ({ faqs }: FAQProps) {
     </Card>
   );
 }
+

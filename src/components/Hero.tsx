@@ -26,9 +26,8 @@ export function Hero() {
               >
                 Invest in the{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-mustang to-sage">
-                  Wild West
-                </span>{" "}
-                Spirit
+                  New West
+                </span>
               </motion.h1>
               
               <motion.p
@@ -37,9 +36,8 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-lg lg:text-xl text-muted-foreground max-w-2xl"
               >
-                Discover unique investment opportunities in iconic American Mustangs, 
-                barndominium ranch houses, and community programs. Let our AI wranglers 
-                guide you to the perfect investment.
+                Invest in the future of the American West—wild Mustangs, barndominium ranch homes, 
+                and community programs. Let our AI wranglers ride with you on the perfect investment.
               </motion.p>
             </div>
 
@@ -130,3 +128,4 @@ export function Hero() {
     </section>
   );
 }
+
