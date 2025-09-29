@@ -16,7 +16,7 @@ interface AgentMessage {
 }
 
 export function AgentDock() {
-  const { isOpen, setIsOpen, currentRoute } = useAgent();
+  const { isOpen, openDock, closeDock, route, sessionId, emit } = useAgent();
   const [messages, setMessages] = useState<AgentMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +47,14 @@ export function AgentDock() {
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
     setIsLoading(true);
+    
+    // Emit message sent event
+    emit("message:sent", { 
+      message: inputValue, 
+      route, 
+      sessionId,
+      timestamp: Date.now() 
+    });
 
     try {
       // Call the agent API
@@ -57,7 +65,8 @@ export function AgentDock() {
         },
         body: JSON.stringify({
           message: inputValue,
-          route: currentRoute,
+          route: route,
+          sessionId: sessionId,
         }),
       });
 
@@ -71,6 +80,14 @@ export function AgentDock() {
       };
 
       setMessages(prev => [...prev, agentMessage]);
+      
+      // Emit message received event
+      emit("message:received", { 
+        message: data.response, 
+        route, 
+        sessionId,
+        timestamp: Date.now() 
+      });
     } catch (error) {
       console.error("Error calling agent API:", error);
       const errorMessage: AgentMessage = {
@@ -93,7 +110,7 @@ export function AgentDock() {
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpen} onOpenChange={(open) => open ? openDock() : closeDock()}>
       <SheetTrigger asChild>
         <motion.div
           className="fixed bottom-6 right-6 z-50"
