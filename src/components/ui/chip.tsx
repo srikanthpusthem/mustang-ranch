@@ -8,11 +8,11 @@ const chipVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-surface-alt text-text border border-border hover:bg-accent hover:text-white hover:border-accent",
+          "bg-surface-alt text-text border border-border hover:bg-accent hover:text-white hover:border-accent focus-visible:ring-accent/50",
         selected:
-          "bg-accent text-white border border-accent shadow-card",
+          "bg-accent text-white border border-accent shadow-card focus-visible:ring-accent/50",
         outline:
-          "border border-border text-text hover:bg-surface-alt hover:border-accent",
+          "border border-border text-text hover:bg-surface-alt hover:border-accent focus-visible:ring-accent/50",
       },
       size: {
         sm: "h-7 px-3 text-small",

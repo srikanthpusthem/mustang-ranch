@@ -266,6 +266,7 @@ export default function ContactPage() {
             </Card>
           </motion.div>
         </PageContainer>
+      </div>
     </div>
   );
 }

@@ -48,20 +48,20 @@
 }
 
 .dark {
-  /* Dark Mode Colors */
-  --bg: #0F1115; /* dark bg */
-  --surface: #151821; /* dark surface */
-  --surface-alt: #1D2230; /* dark surfaceAlt */
-  --border: #2A3040; /* dark border */
-  --text: #E5E7EB; /* dark text */
-  --muted: #9CA3AF; /* dark muted */
-  --accent: #C88B6A; /* muted mustang */
-  --accent-alt: #A1B67A; /* dark sage */
-  --info: #294357; /* dark sky */
+  /* Dark Mode Colors - Enhanced contrast */
+  --bg: #0A0B0F; /* darker bg for better contrast */
+  --surface: #1A1D26; /* elevated surface */
+  --surface-alt: #242832; /* higher elevation surface */
+  --border: #2D3142; /* subtle border */
+  --text: #F1F3F4; /* high contrast text */
+  --muted: #B0B3B8; /* readable muted text */
+  --accent: #D4A574; /* warmer mustang for dark mode */
+  --accent-alt: #B5C99A; /* softer sage for dark mode */
+  --info: #3A4A5C; /* deeper sky for dark mode */
   
-  /* Shadows (adjusted for dark mode) */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-  --shadow-card-hover: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  /* Shadows (softer and less spread for dark mode) */
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.4), 0 1px 1px -1px rgb(0 0 0 / 0.4);
+  --shadow-card-hover: 0 2px 4px -1px rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
   
   /* Legacy shadcn/ui compatibility */
   --background: var(--bg);
@@ -167,5 +167,6 @@
 
 /* Focus styles for accessibility */
 .focus-visible:focus-visible {
-  @apply outline-2 outline-offset-2 outline-ring;
+  @apply outline-2 outline-offset-2;
+  outline-color: var(--accent);
 }

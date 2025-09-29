@@ -18,8 +18,23 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-sand via-background to-sky/20 py-20 lg:py-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden py-20 lg:py-32">
+      {/* Skyline gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sand via-background to-sky/20" />
+      
+      {/* Vignette overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/5 via-transparent to-transparent" />
+      
+      {/* Decorative SVG - Mustang silhouette */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-10 pointer-events-none" aria-hidden="true">
+        <svg width="200" height="150" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 120C20 120 40 100 60 110C80 120 100 100 120 110C140 120 160 100 180 110C180 110 190 120 190 130L20 130C20 130 20 120 20 120Z" fill="currentColor" className="text-mustang"/>
+          <path d="M30 100C30 100 50 80 70 90C90 100 110 80 130 90C150 100 170 80 190 90C190 90 200 100 200 110L30 110C30 110 30 100 30 100Z" fill="currentColor" className="text-mustang"/>
+          <path d="M40 80C40 80 60 60 80 70C100 80 120 60 140 70C160 80 180 60 200 70C200 70 210 80 210 90L40 90C40 90 40 80 40 80Z" fill="currentColor" className="text-mustang"/>
+        </svg>
+      </div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <motion.div
@@ -104,6 +119,16 @@ export function Hero() {
                 Meet Your Wrangler
               </Button>
             </motion.div>
+            
+            {/* Helper text */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-small text-muted text-center"
+            >
+              No financial advice—educational only
+            </motion.p>
           </motion.div>
 
           {/* Visual */}

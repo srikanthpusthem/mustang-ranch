@@ -10,14 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-accent text-white shadow-card hover:bg-accent/90 hover:shadow-card-hover",
+          "bg-accent text-white shadow-card hover:bg-accent/90 hover:shadow-card-hover focus-visible:ring-accent/50",
         secondary:
-          "bg-surface-alt text-text border border-border shadow-card hover:bg-surface-alt/80 hover:shadow-card-hover",
+          "bg-surface-alt text-text border border-border shadow-card hover:bg-surface-alt/80 hover:shadow-card-hover focus-visible:ring-accent/50",
         ghost:
-          "text-text hover:bg-surface-alt hover:text-text",
-        link: "text-accent underline-offset-4 hover:underline",
+          "text-text hover:bg-surface-alt hover:text-text focus-visible:ring-accent/50",
+        link: "text-accent underline-offset-4 hover:underline focus-visible:ring-accent/50",
         destructive:
-          "bg-red-600 text-white shadow-card hover:bg-red-700 hover:shadow-card-hover",
+          "bg-red-600 text-white shadow-card hover:bg-red-700 hover:shadow-card-hover focus-visible:ring-red-500/50",
       },
       size: {
         sm: "h-8 px-3 text-small gap-1.5",
