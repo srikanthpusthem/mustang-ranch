@@ -24,7 +24,7 @@ function SolidSheetContent({
       <SheetPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
       <SheetPrimitive.Content
         className={cn(
-          "bg-white dark:bg-gray-900 data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+          "bg-background text-foreground data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
           side === "right" &&
             "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l border-border sm:max-w-sm",
           side === "left" &&
@@ -191,23 +191,23 @@ export function AgentDock() {
       <Sheet open={isOpen} onOpenChange={(open) => open ? openDock() : closeDock()}>
       
       <SolidSheetContent side="right" className="w-full sm:max-w-md p-0">
-        <div className="flex flex-col h-full bg-white dark:bg-gray-900">
+        <div className="flex flex-col h-full bg-background">
           <SheetHeader className="p-6 border-b border-border bg-accent text-white">
             <SheetTitle className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
               AI Wrangler
             </SheetTitle>
-            <p className="text-sm text-white/80">
+            <p className="text-sm text-white/90">
               Your guide to Western investments
             </p>
-            <p className="text-xs text-white/60 mt-2">
+            <p className="text-xs text-white/80 mt-2">
               Educational only — not financial advice.
             </p>
           </SheetHeader>
 
           <div className="flex-1 overflow-hidden flex flex-col">
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white dark:bg-gray-900">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background">
               <AnimatePresence>
                 {messages.map((message) => (
                   <motion.div
@@ -227,7 +227,7 @@ export function AgentDock() {
                       className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                         message.type === "user"
                           ? "bg-accent text-white"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
+                          : "bg-card border border-border shadow-sm text-foreground"
                       }`}
                     >
                       <p className="text-sm">{message.content}</p>
@@ -251,7 +251,7 @@ export function AgentDock() {
                   <div className="w-8 h-8 rounded-full bg-mustang flex items-center justify-center">
                     <Bot className="h-4 w-4 text-white" />
                   </div>
-                  <div className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-2xl px-4 py-2">
+                  <div className="bg-card border border-border shadow-sm rounded-2xl px-4 py-2 text-foreground">
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
                       <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce [animation-delay:0.1s]" />
@@ -263,7 +263,7 @@ export function AgentDock() {
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t border-border bg-white dark:bg-gray-900">
+            <div className="p-4 border-t border-border bg-background">
               <div className="flex gap-2">
                 <Input
                   value={inputValue}
@@ -271,7 +271,7 @@ export function AgentDock() {
                   onKeyPress={handleKeyPress}
                   placeholder="Ask your AI wrangler..."
                   disabled={isLoading}
-                  className="flex-1"
+                  className="flex-1 bg-muted/40 focus:bg-background border-border placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-accent"
                 />
                 <Button
                   onClick={handleSendMessage}
