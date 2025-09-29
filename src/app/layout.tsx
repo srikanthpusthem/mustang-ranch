@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { AgentProvider } from "@/components/AgentProvider";
 import { AgentDock } from "@/components/AgentDock";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -50,11 +51,12 @@ export default function RootLayout({
         className={`${inter.variable} ${fraunces.variable} antialiased grain-overlay`}
       >
         <AgentProvider>
-          <div className="min-h-screen bg-background">
+          <div className="min-h-screen bg-background flex flex-col">
             <Navbar />
-            <main className="relative">
+            <main className="relative flex-1">
               {children}
             </main>
+            <Footer />
             <AgentDock />
           </div>
         </AgentProvider>
