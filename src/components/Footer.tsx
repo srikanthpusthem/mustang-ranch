@@ -10,7 +10,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-charcoal text-white py-8 mt-auto border-t border-border">
+    <footer className="bg-surface-alt border-t border-border py-8 mt-auto">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-6">
           {/* Social Icons */}
@@ -19,7 +19,7 @@ export function Footer() {
               <a
                 key={label}
                 href={href}
-                className="text-white/60 hover:text-white transition-colors"
+                className="text-muted hover:text-accent transition-colors"
                 aria-label={label}
               >
                 <Icon className="h-5 w-5" />
@@ -28,13 +28,13 @@ export function Footer() {
           </div>
           
           {/* Disclaimer */}
-          <p className="text-small text-white/80 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-small text-muted leading-relaxed max-w-2xl mx-auto">
             Educational only — not financial, legal, or tax advice. Opportunities subject to eligibility & availability.
           </p>
           
           {/* Copyright */}
-          <div className="pt-4 border-t border-white/10">
-            <p className="text-small text-white/60">
+          <div className="pt-4 border-t border-border">
+            <p className="text-small text-muted">
               © 2024 Mustang Ranch. All rights reserved.
             </p>
           </div>

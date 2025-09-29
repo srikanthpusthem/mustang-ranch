@@ -149,9 +149,9 @@ export function AgentDock() {
       {/* Chat Panel */}
       <Sheet open={isOpen} onOpenChange={(open) => open ? openDock() : closeDock()}>
       
-      <SheetContent side="right" className="w-full sm:max-w-md p-0">
+      <SheetContent side="right" className="w-full sm:max-w-md p-0 bg-surface border-l border-border">
         <div className="flex flex-col h-full">
-          <SheetHeader className="p-6 border-b bg-mustang text-white">
+          <SheetHeader className="p-6 border-b border-border bg-accent text-white">
             <SheetTitle className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
               AI Wrangler
@@ -185,8 +185,8 @@ export function AgentDock() {
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                         message.type === "user"
-                          ? "bg-mustang text-white"
-                          : "bg-muted text-foreground"
+                          ? "bg-accent text-white"
+                          : "bg-surface-alt text-text border border-border"
                       }`}
                     >
                       <p className="text-sm">{message.content}</p>
@@ -210,11 +210,11 @@ export function AgentDock() {
                   <div className="w-8 h-8 rounded-full bg-mustang flex items-center justify-center">
                     <Bot className="h-4 w-4 text-white" />
                   </div>
-                  <div className="bg-muted text-foreground rounded-2xl px-4 py-2">
+                  <div className="bg-surface-alt text-text border border-border rounded-2xl px-4 py-2">
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
-                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce [animation-delay:0.1s]" />
+                      <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce [animation-delay:0.2s]" />
                     </div>
                   </div>
                 </motion.div>
@@ -222,7 +222,7 @@ export function AgentDock() {
             </div>
 
             {/* Input */}
-            <div className="p-4 border-t">
+            <div className="p-4 border-t border-border bg-surface">
               <div className="flex gap-2">
                 <Input
                   value={inputValue}
@@ -236,7 +236,7 @@ export function AgentDock() {
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isLoading}
                   size="sm"
-                  className="bg-mustang hover:bg-mustang/90"
+                  variant="primary"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
