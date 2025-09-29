@@ -11,7 +11,8 @@ type AgentEvent =
   | "message:received"
   | "route:changed"
   | "session:started"
-  | "session:ended";
+  | "session:ended"
+  | "agent_open";
 
 type EventData = Record<string, unknown>;
 
@@ -71,7 +72,29 @@ export function AgentProvider({ children }: { children: ReactNode }) {
     if (process.env.NODE_ENV === 'development') {
       console.log(`[AgentProvider] Event: ${event}`, data);
     }
-  }, [eventListeners]);
+
+    // Send metrics to server
+    const metricsData = {
+      event,
+      data,
+      route,
+      sessionId,
+      timestamp: Date.now(),
+      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined,
+    };
+
+    // Fire and forget - don't await to avoid blocking
+    fetch('/api/metrics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(metricsData),
+    }).catch(error => {
+      // Silently fail to avoid breaking the app
+      console.warn('[AgentProvider] Failed to send metrics:', error);
+    });
+  }, [eventListeners, route, sessionId]);
 
   const on = useCallback((event: AgentEvent, callback: (data?: EventData) => void) => {
     setEventListeners(prev => {
