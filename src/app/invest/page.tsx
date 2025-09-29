@@ -300,8 +300,9 @@ export default function InvestPage() {
               </Button>
             </div>
           )}
-        </motion.div>
-      </PageContainer>
+          </motion.div>
+        </PageContainer>
+      </div>
     </div>
   );
 }

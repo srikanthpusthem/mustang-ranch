@@ -65,7 +65,7 @@ export default function AdminPage() {
                   <p className="text-muted-foreground mb-4">
                     Manage user accounts and permissions.
                   </p>
-                  <Button variant="outline" disabled>
+                  <Button variant="secondary" disabled>
                     Coming Soon
                   </Button>
                 </CardContent>
@@ -82,7 +82,7 @@ export default function AdminPage() {
                   <p className="text-muted-foreground mb-4">
                     Add and manage investment opportunities.
                   </p>
-                  <Button variant="outline" disabled>
+                  <Button variant="secondary" disabled>
                     Coming Soon
                   </Button>
                 </CardContent>
@@ -99,7 +99,7 @@ export default function AdminPage() {
                   <p className="text-muted-foreground mb-4">
                     View platform analytics and reports.
                   </p>
-                  <Button variant="outline" disabled>
+                  <Button variant="secondary" disabled>
                     Coming Soon
                   </Button>
                 </CardContent>
@@ -108,7 +108,7 @@ export default function AdminPage() {
 
             <div className="text-center">
               <Button
-                variant="outline"
+                variant="secondary"
                 onClick={() => {
                   setIsAuthenticated(false);
                   setPassword("");

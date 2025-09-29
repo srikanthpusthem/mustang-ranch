@@ -188,7 +188,7 @@ export default function AboutPage() {
                     Explore Opportunities
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="secondary" size="lg">
                   <Link href="/community">
                     Join Our Community
                   </Link>

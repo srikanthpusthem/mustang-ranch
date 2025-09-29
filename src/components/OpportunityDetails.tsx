@@ -423,7 +423,7 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
                     Join Waitlist
                   </Button>
                   <Button 
-                    variant="outline" 
+                    variant="secondary" 
                     className="w-full border-mustang text-mustang hover:bg-mustang hover:text-white h-12"
                     onClick={handleMeetWrangler}
                   >
