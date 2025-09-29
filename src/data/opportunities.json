@@ -1,98 +1,98 @@
 [
   {
     "slug": "thunder-ranch-mustangs",
-    "title": "Thunder Ranch Mustang Sanctuary",
+    "title": "Thunder Ranch Mustang Sanctuary (Sample)",
     "type": "mustang",
     "region": "Montana",
     "minBuyIn": 2500,
     "estAPR": 12.5,
     "risk": "Medium",
-    "summary": "Invest in a 500-acre sanctuary dedicated to preserving wild mustang heritage while generating sustainable returns through eco-tourism and breeding programs.",
+    "summary": "Sample investment opportunity: 500-acre sanctuary dedicated to preserving wild mustang heritage while generating sustainable returns through eco-tourism and breeding programs. This is illustrative content only.",
     "heroImage": "/images/thunder-ranch.jpg",
     "highlights": [
-      "500-acre protected sanctuary in Montana",
-      "Established breeding program with 50+ mustangs",
-      "Eco-tourism revenue from guided tours"
+      "500-acre protected sanctuary in Montana (sample)",
+      "Established breeding program with 50+ mustangs (sample)",
+      "Eco-tourism revenue from guided tours (sample)"
     ]
   },
   {
     "slug": "sagebrush-stallions",
-    "title": "Sagebrush Stallions Investment Fund",
+    "title": "Sagebrush Stallions Investment Fund (Sample)",
     "type": "mustang",
     "region": "Wyoming",
     "minBuyIn": 5000,
     "estAPR": 15.2,
     "risk": "High",
-    "summary": "High-growth opportunity investing in premium mustang bloodlines and competitive training programs for rodeo and racing circuits.",
+    "summary": "Sample high-growth opportunity investing in premium mustang bloodlines and competitive training programs for rodeo and racing circuits. This is illustrative content only.",
     "heroImage": "/images/sagebrush-stallions.jpg",
     "highlights": [
-      "Premium bloodline acquisition program",
-      "Professional training facilities",
-      "Competitive circuit partnerships"
+      "Premium bloodline acquisition program (sample)",
+      "Professional training facilities (sample)",
+      "Competitive circuit partnerships (sample)"
     ]
   },
   {
     "slug": "prairie-barn-estates",
-    "title": "Prairie Barn Estates Development",
+    "title": "Prairie Barn Estates Development (Sample)",
     "type": "barndominium",
     "region": "Texas",
     "minBuyIn": 10000,
     "estAPR": 8.7,
     "risk": "Low",
-    "summary": "Stable real estate investment in luxury barndominium communities combining modern amenities with rustic charm in prime Texas locations.",
+    "summary": "Sample real estate investment in luxury barndominium communities combining modern amenities with rustic charm in prime Texas locations. This is illustrative content only.",
     "heroImage": "/images/prairie-barn.jpg",
     "highlights": [
-      "Prime Texas Hill Country location",
-      "Luxury finishes and modern amenities",
-      "Strong rental demand and appreciation"
+      "Prime Texas Hill Country location (sample)",
+      "Luxury finishes and modern amenities (sample)",
+      "Strong rental demand and appreciation (sample)"
     ]
   },
   {
     "slug": "rustic-ridge-ranch",
-    "title": "Rustic Ridge Ranch Homes",
+    "title": "Rustic Ridge Ranch Homes (Sample)",
     "type": "barndominium",
     "region": "Colorado",
     "minBuyIn": 15000,
     "estAPR": 11.3,
     "risk": "Medium",
-    "summary": "Mountain-view barndominium development targeting outdoor enthusiasts and remote workers seeking the perfect work-life balance.",
+    "summary": "Sample mountain-view barndominium development targeting outdoor enthusiasts and remote workers seeking the perfect work-life balance. This is illustrative content only.",
     "heroImage": "/images/rustic-ridge.jpg",
     "highlights": [
-      "Breathtaking mountain views",
-      "High-speed internet and modern workspace",
-      "Proximity to outdoor recreation"
+      "Breathtaking mountain views (sample)",
+      "High-speed internet and modern workspace (sample)",
+      "Proximity to outdoor recreation (sample)"
     ]
   },
   {
     "slug": "community-garden-network",
-    "title": "Community Garden Network",
+    "title": "Community Garden Network (Sample)",
     "type": "garden",
     "region": "California",
     "minBuyIn": 1000,
     "estAPR": 6.8,
     "risk": "Low",
-    "summary": "Social impact investment supporting urban agriculture and community food security through a network of sustainable garden spaces.",
+    "summary": "Sample social impact investment supporting urban agriculture and community food security through a network of sustainable garden spaces. This is illustrative content only.",
     "heroImage": "/images/community-garden.jpg",
     "highlights": [
-      "Multiple urban garden locations",
-      "Educational programs and workshops",
-      "Local food security impact"
+      "Multiple urban garden locations (sample)",
+      "Educational programs and workshops (sample)",
+      "Local food security impact (sample)"
     ]
   },
   {
     "slug": "heritage-seed-preservation",
-    "title": "Heritage Seed Preservation Initiative",
+    "title": "Heritage Seed Preservation Initiative (Sample)",
     "type": "garden",
     "region": "Oregon",
     "minBuyIn": 2000,
     "estAPR": 9.4,
     "risk": "Medium",
-    "summary": "Supporting agricultural biodiversity through heritage seed preservation, organic farming education, and sustainable agriculture research.",
+    "summary": "Sample agricultural biodiversity investment through heritage seed preservation, organic farming education, and sustainable agriculture research. This is illustrative content only.",
     "heroImage": "/images/heritage-seeds.jpg",
     "highlights": [
-      "Rare seed variety preservation",
-      "Organic farming education center",
-      "Research partnerships with universities"
+      "Rare seed variety preservation (sample)",
+      "Organic farming education center (sample)",
+      "Research partnerships with universities (sample)"
     ]
   }
 ]

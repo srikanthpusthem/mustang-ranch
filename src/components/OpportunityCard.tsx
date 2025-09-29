@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, MapPin, DollarSign, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { useAgent } from "./AgentProvider";
 
 interface Opportunity {
   slug: string;
@@ -44,6 +45,8 @@ const riskColors = {
 };
 
 export function OpportunityCard({ opportunity, delay = 0 }: OpportunityCardProps) {
+  const { emit } = useAgent();
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -51,6 +54,19 @@ export function OpportunityCard({ opportunity, delay = 0 }: OpportunityCardProps
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const handleCardClick = () => {
+    emit('invest_card_click', {
+      slug: opportunity.slug,
+      title: opportunity.title,
+      type: opportunity.type,
+      region: opportunity.region,
+      minBuyIn: opportunity.minBuyIn,
+      estAPR: opportunity.estAPR,
+      risk: opportunity.risk,
+      timestamp: Date.now()
+    });
   };
 
   return (
@@ -144,7 +160,7 @@ export function OpportunityCard({ opportunity, delay = 0 }: OpportunityCardProps
             </ul>
           </div>
 
-          <Button asChild className="w-full group">
+          <Button asChild className="w-full group" onClick={handleCardClick}>
             <Link href={`/invest/${opportunity.slug}`} className="flex items-center justify-center gap-2">
               View Details
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

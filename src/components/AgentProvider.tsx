@@ -13,7 +13,10 @@ type AgentEvent =
   | "session:started"
   | "session:ended"
   | "agent_open"
-  | "hero_meet_wrangler";
+  | "hero_meet_wrangler"
+  | "find_filters_apply"
+  | "lead_submit"
+  | "invest_card_click";
 
 type EventData = Record<string, unknown>;
 

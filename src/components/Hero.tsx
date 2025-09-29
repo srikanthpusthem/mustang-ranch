@@ -10,11 +10,11 @@ export function Hero() {
   const { openDock, emit } = useAgent();
 
   const handleMeetWrangler = () => {
-    openDock();
     emit('hero_meet_wrangler', {
       source: 'hero_cta',
       timestamp: Date.now()
     });
+    openDock();
   };
 
   return (
@@ -52,7 +52,7 @@ export function Hero() {
               </motion.p>
             </div>
 
-            {/* Stats */}
+            {/* Sample Metrics */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -61,17 +61,25 @@ export function Hero() {
             >
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">$2.4M</div>
-                <div className="text-sm text-muted-foreground">Total Invested</div>
+                <div className="text-sm text-muted-foreground">Sample Total</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">12.8%</div>
-                <div className="text-sm text-muted-foreground">Avg. Returns</div>
+                <div className="text-sm text-muted-foreground">Sample Returns</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">150+</div>
-                <div className="text-sm text-muted-foreground">Investors</div>
+                <div className="text-sm text-muted-foreground">Sample Investors</div>
               </div>
             </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-xs text-muted-foreground text-center italic"
+            >
+              Sample metrics (illustrative)
+            </motion.p>
 
             {/* CTA Buttons */}
             <motion.div

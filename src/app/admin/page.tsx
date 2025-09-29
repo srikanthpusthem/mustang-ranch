@@ -7,8 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Shield, AlertTriangle } from "lucide-react";
+import { notFound } from "next/navigation";
 
 export default function AdminPage() {
+  // Gate behind environment variable
+  if (process.env.NEXT_PUBLIC_ADMIN_ACCESS !== 'true') {
+    notFound();
+  }
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
@@ -16,12 +21,12 @@ export default function AdminPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple password check (in production, this would be more secure)
-    if (password === "admin123") {
+    // Placeholder authentication - implement proper auth in production
+    if (password && password.length > 0) {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Invalid password");
+      setError("Password required");
       setPassword("");
     }
   };
@@ -165,15 +170,6 @@ export default function AdminPage() {
                 </Button>
               </form>
 
-              <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-600 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-yellow-800 dark:text-yellow-200">
-                    <p className="font-medium">Demo Credentials:</p>
-                    <p>Password: admin123</p>
-                  </div>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </motion.div>

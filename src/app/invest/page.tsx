@@ -6,8 +6,9 @@ import { OpportunityCard } from "@/components/OpportunityCard";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, MessageCircle } from "lucide-react";
 import opportunitiesData from "@/data/opportunities.json";
+import { useAgent } from "@/components/AgentProvider";
 
 interface Opportunity {
   slug: string;
@@ -23,6 +24,7 @@ interface Opportunity {
 }
 
 export default function InvestPage() {
+  const { openDock, emit } = useAgent();
   const [opportunities] = useState<Opportunity[]>(opportunitiesData as Opportunity[]);
   const [filteredOpportunities, setFilteredOpportunities] = useState<Opportunity[]>(opportunitiesData as Opportunity[]);
   const [typeFilter, setTypeFilter] = useState<string>("all");
@@ -73,6 +75,23 @@ export default function InvestPage() {
     setFilteredOpportunities(filtered);
   }, [opportunities, typeFilter, regionFilter, riskFilter]);
 
+  const handleWranglerChip = (chipType: string, chipValue: string) => {
+    emit('find_filters_apply', {
+      source: 'wrangler_hint',
+      chipType,
+      chipValue,
+      currentFilters: { type: typeFilter, region: regionFilter, risk: riskFilter }
+    });
+    openDock();
+  };
+
+  const handleWranglerAction = () => {
+    emit('find_filters_apply', {
+      source: 'wrangler_action',
+      currentFilters: { type: typeFilter, region: regionFilter, risk: riskFilter }
+    });
+    openDock();
+  };
 
   return (
     <div className="min-h-screen py-20">
@@ -92,6 +111,67 @@ export default function InvestPage() {
             and community gardens. Each opportunity is carefully vetted and offers 
             the potential for solid returns.
           </p>
+        </motion.div>
+
+        {/* Inline Wrangler Hint */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="bg-gradient-to-r from-sky/10 to-sage/10 rounded-2xl p-6 mb-12 border border-sky/20"
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-sky" />
+                Let your AI Wrangler narrow results
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Try these popular filters or ask for personalized recommendations
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleWranglerChip('type', 'mustang')}
+                className="border-sky/30 text-sky hover:bg-sky/10"
+              >
+                Mustangs
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleWranglerChip('type', 'barndominium')}
+                className="border-sage/30 text-sage hover:bg-sage/10"
+              >
+                Barndominiums
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleWranglerChip('budget', 'under_5k')}
+                className="border-mustang/30 text-mustang hover:bg-mustang/10"
+              >
+                Under $5k
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleWranglerChip('risk', 'low')}
+                className="border-green-300 text-green-700 hover:bg-green-50"
+              >
+                Low Risk
+              </Button>
+              <Button
+                onClick={handleWranglerAction}
+                size="sm"
+                className="bg-sky hover:bg-sky/90 text-white"
+              >
+                Ask Wrangler
+              </Button>
+            </div>
+          </div>
         </motion.div>
 
         {/* Filters */}

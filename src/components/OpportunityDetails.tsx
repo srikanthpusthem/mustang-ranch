@@ -51,7 +51,7 @@ const riskColors = {
 };
 
 export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
-  const { openDock } = useAgent();
+  const { openDock, emit } = useAgent();
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -63,6 +63,13 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
   };
 
   const handleJoinWaitlist = async () => {
+    emit('lead_submit', {
+      intent: 'waitlist',
+      slug: opportunity.slug,
+      source: 'next_steps',
+      timestamp: Date.now()
+    });
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -87,6 +94,11 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
   };
 
   const handleMeetWrangler = () => {
+    emit('hero_meet_wrangler', {
+      source: 'next_steps',
+      slug: opportunity.slug,
+      timestamp: Date.now()
+    });
     openDock();
   };
 
