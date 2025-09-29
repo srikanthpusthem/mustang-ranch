@@ -3,10 +3,51 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Send, Bot, User } from "lucide-react";
 import { useAgent } from "./AgentProvider";
+
+// Custom SheetContent with forced solid background
+function SolidSheetContent({
+  className,
+  children,
+  side = "right",
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Content> & {
+  side?: "top" | "right" | "bottom" | "left"
+}) {
+  return (
+    <SheetPrimitive.Portal>
+      <SheetPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+      <SheetPrimitive.Content
+        className={cn(
+          "bg-surface data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+          side === "right" &&
+            "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l border-border sm:max-w-sm",
+          side === "left" &&
+            "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r border-border sm:max-w-sm",
+          side === "top" &&
+            "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b border-border",
+          side === "bottom" &&
+            "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t border-border",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <SheetPrimitive.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          <span className="sr-only">Close</span>
+        </SheetPrimitive.Close>
+      </SheetPrimitive.Content>
+    </SheetPrimitive.Portal>
+  )
+}
 
 interface AgentMessage {
   id: string;
@@ -149,8 +190,8 @@ export function AgentDock() {
       {/* Chat Panel */}
       <Sheet open={isOpen} onOpenChange={(open) => open ? openDock() : closeDock()}>
       
-      <SheetContent side="right" className="w-full sm:max-w-md p-0 bg-surface border-l border-border">
-        <div className="flex flex-col h-full">
+      <SolidSheetContent side="right" className="w-full sm:max-w-md p-0">
+        <div className="flex flex-col h-full bg-surface">
           <SheetHeader className="p-6 border-b border-border bg-accent text-white">
             <SheetTitle className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
@@ -166,7 +207,7 @@ export function AgentDock() {
 
           <div className="flex-1 overflow-hidden flex flex-col">
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface">
               <AnimatePresence>
                 {messages.map((message) => (
                   <motion.div
@@ -244,7 +285,7 @@ export function AgentDock() {
             </div>
           </div>
         </div>
-      </SheetContent>
+      </SolidSheetContent>
     </Sheet>
     </>
   );
