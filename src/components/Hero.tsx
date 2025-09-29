@@ -2,10 +2,21 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, Star, TrendingUp, Users, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { useAgent } from "./AgentProvider";
 
 export function Hero() {
+  const { openDock, emit } = useAgent();
+
+  const handleMeetWrangler = () => {
+    openDock();
+    emit('hero_meet_wrangler', {
+      source: 'hero_cta',
+      timestamp: Date.now()
+    });
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-sand via-background to-sky/20 py-20 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,11 +87,14 @@ export function Hero() {
                 </Link>
               </Button>
               
-              <Button asChild variant="outline" size="lg" className="border-mustang text-mustang hover:bg-mustang hover:text-white">
-                <Link href="/community" className="flex items-center gap-2">
-                  Join Community
-                  <Users className="h-4 w-4" />
-                </Link>
+              <Button 
+                onClick={handleMeetWrangler}
+                variant="outline" 
+                size="lg" 
+                className="border-mustang text-mustang hover:bg-mustang hover:text-white"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Meet Your Wrangler
               </Button>
             </motion.div>
           </motion.div>

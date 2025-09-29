@@ -12,7 +12,8 @@ type AgentEvent =
   | "route:changed"
   | "session:started"
   | "session:ended"
-  | "agent_open";
+  | "agent_open"
+  | "hero_meet_wrangler";
 
 type EventData = Record<string, unknown>;
 
