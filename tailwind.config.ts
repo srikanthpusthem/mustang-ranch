@@ -10,64 +10,67 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Western theme colors
-        mustang: "#7A3E1D",
-        sage: "#8A9A5B", 
-        sand: "#E7D7BD",
-        sky: "#CBE3F8",
-        charcoal: "#1F2937",
+        // Design System Colors (mapped to CSS variables)
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        "surface-alt": "var(--surface-alt)",
+        border: "var(--border)",
+        text: "var(--text)",
+        accent: "var(--accent)",
+        "accent-alt": "var(--accent-alt)",
+        info: "var(--info)",
         
-        // shadcn/ui colors
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        // Legacy Western theme colors (kept for backward compatibility)
+        mustang: "var(--accent)",
+        sage: "var(--accent-alt)", 
+        sand: "var(--bg)",
+        sky: "var(--info)",
+        charcoal: "var(--text)",
+        
+        // shadcn/ui colors (mapped to design system)
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
+        input: "var(--input)",
+        ring: "var(--ring)",
       },
       fontFamily: {
         'serif': ['Fraunces', 'DM Serif Display', 'serif'],
         'sans': ['Inter', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
+        xl: "var(--radius-xl)",
+        "2xl": "var(--radius-2xl)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        "2xl": "1rem",
+      },
+      boxShadow: {
+        card: "var(--shadow-card)",
+        "card-hover": "var(--shadow-card-hover)",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
