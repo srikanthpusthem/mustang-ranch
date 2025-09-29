@@ -43,7 +43,7 @@ export default function CommunityPage() {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    console.log("Community signup:", data);
+    // Form submitted successfully
     setIsSubmitted(true);
     setIsSubmitting(false);
     reset();

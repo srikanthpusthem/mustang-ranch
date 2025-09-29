@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, TrendingUp, Users, MessageCircle } from "lucide-react";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { useAgent } from "./AgentProvider";
 
 export function Hero() {
   const { openDock, emit } = useAgent();
+  const shouldReduceMotion = useReducedMotion();
 
   const handleMeetWrangler = () => {
     emit('hero_meet_wrangler', {
@@ -15,6 +16,18 @@ export function Hero() {
       timestamp: Date.now()
     });
     openDock();
+  };
+
+  const motionProps = shouldReduceMotion ? {} : {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const staggerProps = shouldReduceMotion ? {} : {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.1 }
   };
 
   return (
@@ -38,22 +51,23 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            {...motionProps}
             className="space-y-8"
           >
             <div className="space-y-4">
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                {...staggerProps}
                 className="text-h1 lg:text-6xl font-serif text-text"
               >
                 Invest in the{" "}
-                <span className="text-mustang font-extrabold">
+                <motion.span 
+                  className="text-mustang font-extrabold"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
                   New West
-                </span>
+                </motion.span>
               </motion.h1>
               
               <motion.p
@@ -103,21 +117,34 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button asChild variant="primary" size="lg">
-                <Link href="/invest" className="flex items-center gap-2">
-                  Explore Investments
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              
-              <Button 
-                onClick={handleMeetWrangler}
-                variant="secondary" 
-                size="lg"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
               >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                Meet Your Wrangler
-              </Button>
+                <Button asChild variant="primary" size="lg" className="transition-all duration-200 hover:opacity-90">
+                  <Link href="/invest" className="flex items-center gap-2">
+                    Explore Investments
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button 
+                  onClick={handleMeetWrangler}
+                  variant="secondary" 
+                  size="lg"
+                  className="transition-all duration-200 hover:opacity-90"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Meet Your Wrangler
+                </Button>
+              </motion.div>
             </motion.div>
             
             {/* Helper text */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, MapPin, DollarSign, TrendingUp } from "lucide-react";
@@ -39,6 +39,7 @@ const riskColorsDark = {
 
 export function OpportunityCard({ opportunity, delay = 0 }: OpportunityCardProps) {
   const { emit } = useAgent();
+  const shouldReduceMotion = useReducedMotion();
 
   const handleCardClick = () => {
     emit('invest_card_click', {
@@ -53,12 +54,16 @@ export function OpportunityCard({ opportunity, delay = 0 }: OpportunityCardProps
     });
   };
 
+  const cardMotionProps = shouldReduceMotion ? {} : {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: delay * 0.1 }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -2 }}
+      {...cardMotionProps}
+      whileHover={shouldReduceMotion ? {} : { y: -2 }}
     >
       <Card className="h-full group hover:border-accent/50 transition-all duration-200">
         <CardContent className="p-6 space-y-4">
