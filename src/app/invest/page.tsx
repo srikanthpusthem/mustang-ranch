@@ -25,43 +25,54 @@ interface Opportunity {
 export default function InvestPage() {
   const [opportunities] = useState<Opportunity[]>(opportunitiesData as Opportunity[]);
   const [filteredOpportunities, setFilteredOpportunities] = useState<Opportunity[]>(opportunitiesData as Opportunity[]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
-  const [regionFilter, setRegionFilter] = useState<string>("all");
-  const [riskFilter, setRiskFilter] = useState<string>("all");
+  const [regionFilter, setRegionFilter] = useState<string>("");
+  const [riskFilter, setRiskFilter] = useState<string>("any");
+
+  // Load filters from localStorage on mount
+  useEffect(() => {
+    const savedFilters = localStorage.getItem('mustang_filters_v1');
+    if (savedFilters) {
+      try {
+        const { type, region, risk } = JSON.parse(savedFilters);
+        setTypeFilter(type || "all");
+        setRegionFilter(region || "");
+        setRiskFilter(risk || "any");
+      } catch (error) {
+        console.warn('Failed to parse saved filters:', error);
+      }
+    }
+  }, []);
+
+  // Save filters to localStorage whenever they change
+  useEffect(() => {
+    const filters = { type: typeFilter, region: regionFilter, risk: riskFilter };
+    localStorage.setItem('mustang_filters_v1', JSON.stringify(filters));
+  }, [typeFilter, regionFilter, riskFilter]);
 
   useEffect(() => {
     let filtered = opportunities;
-
-    // Search filter
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (opp) =>
-          opp.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          opp.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          opp.region.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
 
     // Type filter
     if (typeFilter !== "all") {
       filtered = filtered.filter((opp) => opp.type === typeFilter);
     }
 
-    // Region filter
-    if (regionFilter !== "all") {
-      filtered = filtered.filter((opp) => opp.region === regionFilter);
+    // Region filter (substring match, case-insensitive)
+    if (regionFilter.trim()) {
+      filtered = filtered.filter((opp) => 
+        opp.region.toLowerCase().includes(regionFilter.toLowerCase())
+      );
     }
 
     // Risk filter
-    if (riskFilter !== "all") {
+    if (riskFilter !== "any") {
       filtered = filtered.filter((opp) => opp.risk === riskFilter);
     }
 
     setFilteredOpportunities(filtered);
-  }, [opportunities, searchTerm, typeFilter, regionFilter, riskFilter]);
+  }, [opportunities, typeFilter, regionFilter, riskFilter]);
 
-  const uniqueRegions = Array.from(new Set(opportunities.map((opp) => opp.region)));
 
   return (
     <div className="min-h-screen py-20">
@@ -90,58 +101,59 @@ export default function InvestPage() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 mb-12 border"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {/* Search */}
-            <div className="lg:col-span-2 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search opportunities..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+          <div className="space-y-6">
+            {/* Type Pills */}
+            <div>
+              <label className="text-sm font-medium text-foreground mb-3 block">Type</label>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { value: "all", label: "All" },
+                  { value: "mustang", label: "Mustang" },
+                  { value: "barndominium", label: "Barndominium" },
+                  { value: "garden", label: "Garden" }
+                ].map((option) => (
+                  <Button
+                    key={option.value}
+                    variant={typeFilter === option.value ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setTypeFilter(option.value)}
+                    className={typeFilter === option.value ? "bg-mustang hover:bg-mustang/90" : ""}
+                  >
+                    {option.label}
+                  </Button>
+                ))}
+              </div>
             </div>
 
-            {/* Type Filter */}
-            <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="All Types" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="mustang">Mustangs</SelectItem>
-                <SelectItem value="barndominium">Barndominiums</SelectItem>
-                <SelectItem value="garden">Gardens</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Region Input */}
+            <div>
+              <label className="text-sm font-medium text-foreground mb-3 block">Region</label>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search by region..."
+                  value={regionFilter}
+                  onChange={(e) => setRegionFilter(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            </div>
 
-            {/* Region Filter */}
-            <Select value={regionFilter} onValueChange={setRegionFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="All Regions" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Regions</SelectItem>
-                {uniqueRegions.map((region) => (
-                  <SelectItem key={region} value={region}>
-                    {region}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            {/* Risk Filter */}
-            <Select value={riskFilter} onValueChange={setRiskFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="All Risk Levels" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Risk Levels</SelectItem>
-                <SelectItem value="Low">Low Risk</SelectItem>
-                <SelectItem value="Medium">Medium Risk</SelectItem>
-                <SelectItem value="High">High Risk</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Risk Select */}
+            <div>
+              <label className="text-sm font-medium text-foreground mb-3 block">Risk Level</label>
+              <Select value={riskFilter} onValueChange={setRiskFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Any Risk Level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="any">Any</SelectItem>
+                  <SelectItem value="Low">Low</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="High">High</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </motion.div>
 
@@ -154,7 +166,7 @@ export default function InvestPage() {
         >
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-serif font-bold text-foreground">
-              {filteredOpportunities.length} Opportunity{filteredOpportunities.length !== 1 ? "ies" : ""} Found
+              {filteredOpportunities.length} opportunity{filteredOpportunities.length !== 1 ? "ies" : ""} found
             </h2>
           </div>
 
@@ -181,10 +193,9 @@ export default function InvestPage() {
               </p>
               <Button
                 onClick={() => {
-                  setSearchTerm("");
                   setTypeFilter("all");
-                  setRegionFilter("all");
-                  setRiskFilter("all");
+                  setRegionFilter("");
+                  setRiskFilter("any");
                 }}
                 variant="outline"
               >

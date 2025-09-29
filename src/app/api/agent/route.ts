@@ -4,6 +4,48 @@ export async function POST(request: NextRequest) {
   try {
     const { message, route } = await request.json();
 
+    // Guardrails: Check for investment advice requests
+    const advicePatterns = [
+      /what should i invest/i,
+      /best investment/i,
+      /guarantee/i,
+      /financial advice/i,
+      /investment advice/i,
+      /what to buy/i,
+      /recommend.*invest/i,
+      /should i invest/i,
+      /is.*good investment/i,
+      /worth investing/i,
+      /guaranteed return/i,
+      /safe investment/i,
+      /risk-free/i,
+      /sure thing/i,
+      /can't lose/i
+    ];
+
+    const isAdviceRequest = advicePatterns.some(pattern => pattern.test(message));
+    
+    if (isAdviceRequest) {
+      return NextResponse.json({
+        response: "I can't provide specific investment advice or guarantees. Educational only — not financial, legal, or tax advice. Opportunities subject to eligibility & availability. However, I can help you explore your options, show you examples of our opportunities, or connect you with a human advisor. What would be most helpful?",
+        questions: [
+          "Can you show me examples of opportunities?",
+          "How do I connect with a human advisor?",
+          "What information do you have about risks?"
+        ],
+        suggestions: [
+          "Explore our opportunity examples",
+          "Connect with a human advisor",
+          "Review our educational resources"
+        ],
+        intros: [
+          "I'm here to help you explore options.",
+          "Let me show you what's available."
+        ],
+        riskCallout: "Remember, all investments carry risk. Please review our risk disclosures carefully."
+      });
+    }
+
     // Simple deterministic responses based on route and message content
     let response = "";
 

@@ -13,6 +13,7 @@ import {
   Target
 } from "lucide-react";
 import Link from "next/link";
+import { useAgent } from "./AgentProvider";
 
 interface Opportunity {
   slug: string;
@@ -50,6 +51,8 @@ const riskColors = {
 };
 
 export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
+  const { openDock } = useAgent();
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -57,6 +60,34 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const handleJoinWaitlist = async () => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          intent: 'waitlist',
+          slug: opportunity.slug,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Successfully joined the waitlist! We\'ll notify you when this opportunity becomes available.');
+      } else {
+        alert('Failed to join waitlist. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error joining waitlist:', error);
+      alert('Failed to join waitlist. Please try again.');
+    }
+  };
+
+  const handleMeetWrangler = () => {
+    openDock();
   };
 
   const faqs = [
@@ -355,6 +386,46 @@ export function OpportunityDetails({ opportunity }: OpportunityDetailsProps) {
             </motion.div>
           </div>
         </div>
+
+        {/* Next Steps Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+        >
+          <div className="max-w-4xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl font-serif">Next Steps</CardTitle>
+                <p className="text-muted-foreground">
+                  Ready to take the next step? Choose how you&apos;d like to proceed.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Button 
+                    className="w-full bg-mustang hover:bg-mustang/90 text-white h-12"
+                    onClick={handleJoinWaitlist}
+                  >
+                    Join Waitlist
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-mustang text-mustang hover:bg-mustang hover:text-white h-12"
+                    onClick={handleMeetWrangler}
+                  >
+                    Meet Your Wrangler
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground text-center mt-4">
+                  Join our waitlist to be notified when this opportunity becomes available, 
+                  or chat with our AI wrangler for personalized guidance.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
