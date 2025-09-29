@@ -33,7 +33,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl lg:text-6xl font-serif font-bold text-foreground leading-tight"
+                className="text-h1 lg:text-6xl font-serif text-text"
               >
                 Invest in the{" "}
                 <span className="text-mustang font-extrabold">
@@ -45,7 +45,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl text-muted-foreground max-w-2xl"
+                className="text-body lg:text-xl text-muted max-w-2xl"
               >
                 Invest in the future of the American West—wild Mustangs, barndominium ranch homes, 
                 and community programs. Let our AI wranglers ride with you on the perfect investment.
@@ -61,22 +61,22 @@ export function Hero() {
             >
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">$2.4M</div>
-                <div className="text-sm text-muted-foreground">Sample Total</div>
+                <div className="text-small text-muted">Sample Total</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">12.8%</div>
-                <div className="text-sm text-muted-foreground">Sample Returns</div>
+                <div className="text-small text-muted">Sample Returns</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">150+</div>
-                <div className="text-sm text-muted-foreground">Sample Investors</div>
+                <div className="text-small text-muted">Sample Investors</div>
               </div>
             </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xs text-muted-foreground text-center italic"
+              className="text-small text-muted text-center italic"
             >
               Sample metrics (illustrative)
             </motion.p>
@@ -88,7 +88,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button asChild size="lg" className="bg-mustang hover:bg-mustang/90 text-white">
+              <Button asChild variant="primary" size="lg">
                 <Link href="/invest" className="flex items-center gap-2">
                   Explore Investments
                   <ArrowRight className="h-4 w-4" />
@@ -97,9 +97,8 @@ export function Hero() {
               
               <Button 
                 onClick={handleMeetWrangler}
-                variant="outline" 
-                size="lg" 
-                className="border-mustang text-mustang hover:bg-mustang hover:text-white"
+                variant="secondary" 
+                size="lg"
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
                 Meet Your Wrangler

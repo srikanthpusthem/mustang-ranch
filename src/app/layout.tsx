@@ -10,12 +10,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -48,10 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${fraunces.variable} antialiased grain-overlay`}
+        className={`${inter.variable} ${fraunces.variable} antialiased grain-overlay gradient-bg`}
       >
         <AgentProvider>
-          <div className="min-h-screen bg-background flex flex-col">
+          <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="relative flex-1">
               {children}

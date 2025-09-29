@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Target, Users, Award } from "lucide-react";
 import Link from "next/link";
+import { PageContainer } from "@/components/PageContainer";
 
 export default function AboutPage() {
   const values = [
@@ -32,7 +33,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <PageContainer>
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -196,7 +197,7 @@ export default function AboutPage() {
             </CardContent>
           </Card>
         </motion.div>
-      </div>
+      </PageContainer>
     </div>
   );
 }

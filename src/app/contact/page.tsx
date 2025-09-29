@@ -12,6 +12,7 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { PageContainer } from "@/components/PageContainer";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -119,7 +120,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <PageContainer>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -264,8 +265,7 @@ export default function ContactPage() {
               </CardContent>
             </Card>
           </motion.div>
-        </div>
-      </div>
+        </PageContainer>
     </div>
   );
 }

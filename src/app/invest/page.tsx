@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { OpportunityCard } from "@/components/OpportunityCard";
 import { Button } from "@/components/ui/button";
+import { Chip } from "@/components/ui/chip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, MessageCircle } from "lucide-react";
 import opportunitiesData from "@/data/opportunities.json";
 import { useAgent } from "@/components/AgentProvider";
+import { PageContainer } from "@/components/PageContainer";
 
 interface Opportunity {
   slug: string;
@@ -95,7 +97,7 @@ export default function InvestPage() {
 
   return (
     <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <PageContainer>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -131,42 +133,38 @@ export default function InvestPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleWranglerChip('type', 'mustang')}
-                className="border-sky/30 text-sky hover:bg-sky/10"
-              >
-                Mustangs
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleWranglerChip('type', 'barndominium')}
-                className="border-sage/30 text-sage hover:bg-sage/10"
-              >
-                Barndominiums
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleWranglerChip('budget', 'under_5k')}
-                className="border-mustang/30 text-mustang hover:bg-mustang/10"
-              >
-                Under $5k
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleWranglerChip('risk', 'low')}
-                className="border-green-300 text-green-700 hover:bg-green-50"
-              >
-                Low Risk
-              </Button>
+            <Chip
+              variant="outline"
+              size="sm"
+              onClick={() => handleWranglerChip('type', 'mustang')}
+            >
+              Mustangs
+            </Chip>
+            <Chip
+              variant="outline"
+              size="sm"
+              onClick={() => handleWranglerChip('type', 'barndominium')}
+            >
+              Barndominiums
+            </Chip>
+            <Chip
+              variant="outline"
+              size="sm"
+              onClick={() => handleWranglerChip('budget', 'under_5k')}
+            >
+              Under $5k
+            </Chip>
+            <Chip
+              variant="outline"
+              size="sm"
+              onClick={() => handleWranglerChip('risk', 'low')}
+            >
+              Low Risk
+            </Chip>
               <Button
                 onClick={handleWranglerAction}
+                variant="primary"
                 size="sm"
-                className="bg-sky hover:bg-sky/90 text-white"
               >
                 Ask Wrangler
               </Button>
@@ -192,15 +190,14 @@ export default function InvestPage() {
                   { value: "barndominium", label: "Barndominium" },
                   { value: "garden", label: "Garden" }
                 ].map((option) => (
-                  <Button
+                  <Chip
                     key={option.value}
-                    variant={typeFilter === option.value ? "default" : "outline"}
+                    variant={typeFilter === option.value ? "selected" : "default"}
                     size="sm"
                     onClick={() => setTypeFilter(option.value)}
-                    className={typeFilter === option.value ? "bg-mustang hover:bg-mustang/90" : ""}
                   >
                     {option.label}
-                  </Button>
+                  </Chip>
                 ))}
               </div>
             </div>
@@ -277,14 +274,14 @@ export default function InvestPage() {
                   setRegionFilter("");
                   setRiskFilter("any");
                 }}
-                variant="outline"
+                variant="secondary"
               >
                 Clear Filters
               </Button>
             </div>
           )}
         </motion.div>
-      </div>
+      </PageContainer>
     </div>
   );
 }

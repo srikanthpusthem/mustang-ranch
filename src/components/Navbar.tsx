@@ -37,7 +37,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-surface/80 backdrop-blur-md supports-[backdrop-filter]:bg-surface/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -45,7 +45,7 @@ export function Navbar() {
             <div className="h-8 w-8 rounded-full bg-gradient-to-br from-mustang to-sage flex items-center justify-center">
               <span className="text-white font-bold text-sm">MR</span>
             </div>
-            <span className="font-serif text-xl font-bold text-foreground">
+            <span className="font-serif text-xl font-bold text-text">
               Mustang Ranch
             </span>
           </Link>
@@ -56,16 +56,16 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${
+                className={`relative px-3 py-2 text-small font-medium transition-colors hover:text-accent hover:underline ${
                   pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-accent"
+                    : "text-muted"
                 }`}
               >
                 {item.label}
                 {pathname === item.href && (
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
                     layoutId="activeTab"
                     initial={false}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -75,8 +75,12 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
+          {/* CTA Button & Theme Toggle */}
           <div className="flex items-center space-x-4">
+            <Button asChild size="sm" className="hidden md:flex bg-accent hover:bg-accent/90 text-white">
+              <Link href="/invest">Get Started</Link>
+            </Button>
+            
             <Button
               variant="ghost"
               size="sm"

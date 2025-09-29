@@ -30,15 +30,15 @@ export function PillarCard({ title, description, icon, href, color, delay = 0 }:
           </div>
           
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif font-bold text-foreground">
+            <h3 className="text-h3 font-serif text-text">
               {title}
             </h3>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted text-body leading-relaxed">
               {description}
             </p>
           </div>
           
-          <Button asChild variant="outline" className="w-full group">
+          <Button asChild variant="secondary" className="w-full group">
             <Link href={href} className="flex items-center justify-center gap-2">
               Learn More
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -84,10 +84,10 @@ export function PillarsSection() {
           transition={{ duration: 0.6 }}
           className="text-center space-y-4 mb-16"
         >
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-foreground">
+          <h2 className="text-h2 lg:text-4xl font-serif text-text">
             Three Pillars of Investment
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-body text-muted max-w-3xl mx-auto">
             Our platform focuses on three core investment categories that embody the 
             spirit of the American West while delivering sustainable returns.
           </p>

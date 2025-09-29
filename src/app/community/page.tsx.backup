@@ -260,7 +260,7 @@ export default function CommunityPage() {
               </CardContent>
             </Card>
           </motion.div>
-        </PageContainer>
+      </PageContainer>
     </div>
   );
 }
